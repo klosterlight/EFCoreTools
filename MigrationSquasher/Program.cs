@@ -40,6 +40,7 @@ namespace Bokio.MigrationSquasher
                 var targetMigrationName = targetFileName.Replace(".cs", "");
                 var newFileName = options.NewName + ".cs";
                 var dir = Path.GetDirectoryName(options.Target);
+                Console.WriteLine($"The Target Directory: {dir}");
 
                 if(targetFileName.Substring(0, 14) != newFileName.Substring(0, 14))
                 {
@@ -102,7 +103,7 @@ namespace Bokio.MigrationSquasher
 
                 var prepSql = @$"migrationBuilder.Sql(@""
 IF EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'{targetMigrationName}')
-BEGIN    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'{options.NewName}', N'2.2.4-servicing-10062')
+BEGIN    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'{options.NewName}', N'5.0.13')
 END;
 GO"");";
                 prepTemplate = prepTemplate.Replace(MigrationUpContentPlaceholder, prepSql);
